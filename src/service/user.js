@@ -14,9 +14,9 @@ class User {
     return this.users.get(this.id);
   }
 
-  updateUser(id, role, name) {
+  updateUser(id, role, name, email) {
     const user = this.users.get(Number(id));
-    this.users.set(Number(id), { ...user, role, name });
+    this.users.set(Number(id), { ...user, role, name, email });
     return this.users.get(Number(id));
   }
 
