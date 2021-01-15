@@ -14,12 +14,11 @@ class User {
     return this.users.get(this.id);
   }
 
-  updateUser(id, role, name, email) {
-    const user = this.users.get(Number(id));
-    this.users.set(Number(id), {
-      ...user, role, name, email
+  updateUser(updateUser) {
+    this.users.set(Number(updateUser.id), {
+      ...updateUser
     });
-    return this.users.get(Number(id));
+    return this.users.get(Number(updateUser.id));
   }
 
   deleteUser(id) {

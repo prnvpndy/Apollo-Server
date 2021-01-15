@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import userInstance from '../../service/user';
 
 export default {
@@ -7,9 +8,10 @@ export default {
   },
   updateTrainee: (parent, args, context) => {
     const {
-      id, role, name, email
+      updateUser
     } = args;
-    return userInstance.updateUser(id, role, name, email);
+    console.log('hah', userInstance.updateUser(updateUser));
+    return userInstance.updateUser(updateUser);
   },
   deleteTrainee: (parent, args, context) => {
     const { id } = args;
