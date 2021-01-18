@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { createServer } from 'http';
@@ -34,13 +35,11 @@ class Server {
 
   run() {
     const { config: { PORT } } = this;
-    const { app } = this;
+    // const { app } = this;
     this.httpServer.listen(PORT, (err) => {
       if (err) {
-        // eslint-disable-next-line no-console
         console.log(err);
       }
-      // eslint-disable-next-line no-console
       console.log(`App is running on port ${PORT}`);
     });
   }
