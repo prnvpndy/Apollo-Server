@@ -10,3 +10,8 @@ input UpdateUserInput {
     email: String
     role: String
 }
+
+input LoginInput {
+    email: String!
+    password: String!
+}
