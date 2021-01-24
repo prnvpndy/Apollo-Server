@@ -1,26 +1,35 @@
-import userInstance from '../../service/user';
 import pubsub from '../pubsub';
 import constant from '../../libs/constant';
 
 export default {
-  createTrainee: (parent, args, context) => {
-    const { user } = args;
-    const addedUser = userInstance.createUser(user);
-    pubsub.publish(constant.subscriptions.TRAINEE_ADDED, { traineeAdded: addedUser });
-    return addedUser;
+  createTrainee: async (parent, args, context) => {
+    const { payload: { email, name, password } } = args;
+    const { dataSources: { traineeAPI } } = context;
+    const addedTrainee = await traineeAPI.createTrainee({ email, name, password });
+    const addedTraineeData = JSON.stringify(addedTrainee.data);
+    pubsub.publish(constant.subscriptions.TRAINEE_ADDED, { traineeAdded: addedTrainee.data });
+    return addedTraineeData;
   },
-  updateTrainee: (parent, args, context) => {
+  updateTrainee: async (parent, args, context) => {
     const {
-      updateUser
+      payload: {
+        email, id, name, role, password
+      }
     } = args;
-    console.log('hah', userInstance.updateUser(updateUser));
-    pubsub.publish(constant.subscriptions.TRAINEE_UPDATED, { traineeUpdated: updateUser });
-    return userInstance.updateUser(updateUser);
+    const { dataSources: { traineeAPI } } = context;
+    const updatedTrainee = await traineeAPI.updateTrainee({
+      id, name, email, role, password
+    });
+    const updatedTraineeData = JSON.stringify(updatedTrainee.data);
+    pubsub.publish(constant.subscriptions.TRAINEE_UPDATED, { traineeUpdated: updatedTrainee.data });
+    return updatedTraineeData;
   },
-  deleteTrainee: (parent, args, context) => {
-    const { id } = args;
-    const deletedID = userInstance.deleteUser(id);
+  deleteTrainee: async (parent, args, context) => {
+    const { payload: { id } } = args;
+    const { dataSources: { traineeAPI } } = context;
+    const deletedID = await traineeAPI.deleteTrainee(id);
+    const deletedTraineeData = JSON.stringfy(deletedID);
     pubsub.publish(constant.subscriptions.TRAINEE_DELETED, { traineeDeleted: deletedID });
-    return deletedID;
+    return deletedTraineeData;
   }
 };
