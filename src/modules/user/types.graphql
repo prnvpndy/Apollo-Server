@@ -1,6 +1,40 @@
 type User {
-    id: ID!
     name:String
     email:String
     role: String
+    password: String
+    originalId: String
+    createdAt: String
+    _id: String
+}
+type Alltrainees{
+    status: String
+    message:  String
+    count: String
+    Trainees: [Detail]
+}
+
+type Detail{
+    _id: String
+    name: String
+    role: String
+    email: String
+    password: String
+    createdAt: String
+    originalId: String
+
+}
+type Delete{
+    status: String
+    message: String
+    data: TraineeData
+}
+
+type TraineeData{
+    name: String
+    email: String
+    role: String
+    password: String
+    originalId: String
+    _id: String
 }

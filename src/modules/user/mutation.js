@@ -12,6 +12,7 @@ export default {
       }
     } = context;
     const response = await userAPI.loginUser({ email, password });
-    return response.data;
+    const res = JSON.stringify(response);
+    return res;
   }
 };

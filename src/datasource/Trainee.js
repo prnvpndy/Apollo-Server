@@ -1,4 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
 import { RESTDataSource } from 'apollo-datasource-rest';
 import config from '../config/configuration';
 
@@ -12,8 +11,8 @@ export default class TraineeAPI extends RESTDataSource {
     request.headers.set('Authorization', this.context.token);
   }
 
-  getTrainees() {
-    return this.get('/trainee');
+  getTrainees({ skip, limit }) {
+    return this.get('/trainee', { skip, limit });
   }
 
   createTrainee(payload) {
