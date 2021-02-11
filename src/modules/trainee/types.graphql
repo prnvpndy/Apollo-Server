@@ -21,3 +21,8 @@ input LoginInput {
 input DeleteTrainee{
     id: ID!
 }
+
+input AlltraineesInput{
+    skip: Int
+    limit: Int
+}
